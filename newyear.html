@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Ananya ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#1a0033,#000);
+  font-family:'Segoe UI',sans-serif;
+  color:white;
+}
+
+/* Lock screen */
+#lock{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+input{
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  text-align:center;
+  font-size:1em;
+}
+
+button{
+  margin-top:10px;
+  padding:10px 18px;
+  border:none;
+  border-radius:20px;
+  background:pink;
+  font-size:1em;
+  cursor:pointer;
+}
+
+/* Main card */
+.card{
+  display:none;
+  max-width:360px;
+  margin:40px auto;
+  padding:22px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
+  text-align:center;
+  animation:fadeIn 2s ease;
+}
+
+h1{
+  color:#ffb6c1;
+  text-shadow:0 0 12px pink;
+}
+
+/* Photo */
+.photo{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  margin:12px auto;
+  display:block;
+  opacity:0;
+  animation:photoFade 3s forwards;
+}
+
+/* Typing */
+#typing{
+  font-size:1.05em;
+  line-height:1.6;
+  min-height:240px;
+  margin-top:10px;
+}
+
+.signature{
+  margin-top:10px;
+  font-weight:bold;
+  color:#ffd6e8;
+}
+
+/* Floating items */
+.heart, .sunflower{
+  position:fixed;
+  animation:float 6s linear infinite;
+}
+
+/* Fireworks */
+.firework{
+  position:fixed;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  animation:explode 1.2s ease-out forwards;
+}
+
+/* Animations */
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(0.85);}
+  to{opacity:1;transform:scale(1);}
+}
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+@keyframes explode{
+  from{transform:scale(0);opacity:1;}
+  to{transform:scale(8);opacity:0;}
+}
+@keyframes photoFade{
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="lock">
+  <h2>💖 A Special Surprise 💖</h2>
+  <p>Enter the password</p>
+  <input type="password" id="pass" placeholder="Password">
+  <button onclick="unlock()">Open 💌</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="card" id="main">
+  <h1>Ananya ❤️</h1>
+
+  <img src="love.jpg" class="photo">
+
+  <!-- Distance -->
+  <svg width="280" height="80">
+    <circle cx="30" cy="40" r="8" fill="pink"/>
+    <circle cx="250" cy="40" r="8" fill="pink"/>
+    <line x1="38" y1="40" x2="242" y2="40" stroke="pink" stroke-dasharray="5,5"/>
+    <text x="15" y="70" fill="white" font-size="12">You</text>
+    <text x="225" y="70" fill="white" font-size="12">Me</text>
+    <text x="110" y="30" fill="pink">❤️ Distance ❤️</text>
+  </svg>
+
+  <div id="typing"></div>
+  <div class="signature">— Ayush 💖</div>
+</div>
+
+<script>
+/* PASSWORD */
+function unlock(){
+  if(pass.value === "love"){
+    lock.style.display="none";
+    main.style.display="block";
+    typeWriter();
+    startEffects(); // 🌻 start sunflower + hearts + fireworks
+  } else {
+    alert("Only love opens this ❤️");
+  }
+}
+
+/* TYPING LETTER */
+const text = `My dearest Ananya,
+
+Miles may stand between us,
+but love knows no distance 🌍
+
+Like a sunflower,
+I always turn towards you 🌻
+
+This New Year,
+I promise endless love.
+
+Happy New Year, my sunshine ✨`;
+
+let i = 0;
+function typeWriter(){
+  if(i < text.length){
+    typing.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+    i++;
+    setTimeout(typeWriter, 40);
+  }
+}
+
+/* EFFECTS */
+function startEffects(){
+
+  // Hearts
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(15+Math.random()*20)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },700);
+
+  // 🌻 Sunflowers
+  setInterval(()=>{
+    const s=document.createElement("div");
+    s.className="sunflower";
+    s.innerHTML="🌻";
+    s.style.left=Math.random()*100+"vw";
+    s.style.fontSize=(18+Math.random()*22)+"px";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),6000);
+  },900);
+
+  // Fireworks
+  setInterval(()=>{
+    const f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*60+"vh";
+    f.style.background=`hsl(${Math.random()*360},100%,70%)`;
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1200);
+  },800);
+}
+</script>
+
+</body>
+</html>
